@@ -88,9 +88,13 @@
 		<div class="panel panel-success">
 		<div class="panel-heading">Activity Feeds</div>
 		<div class="panel-body">
+		{% if activity_feeds %}
 			{% for feed in activity_feeds %}
 				<p>{{ feed }}</p>
 			{% endfor %}
+		{% else %}
+			<p class="center">----- No activities -----</p>
+		{% endif %}
 		</div>
 		</div>
 		

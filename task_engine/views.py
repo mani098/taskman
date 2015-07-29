@@ -17,16 +17,27 @@ def login_view(request):
 			email_id = request.POST.get('email_id')
 			username = email_id.split('@')[0]
 			password = request.POST.get('password')
-
-			user = authenticate(username=username, password=password)
-			if user:
-				if user.is_active:
-					login(request, user)
-					return HttpResponseRedirect("/home/")
+			try:
+				user = User.objects.get(email=email_id)
+				user = authenticate(username=username, password=password)
+				if user:
+					if user.is_active:
+						login(request, user)
+						return HttpResponseRedirect("/home/")
+					else:
+						return HttpResponse("Your taskman account is disabled.")
 				else:
-					return HttpResponse("Your taskman account is disabled.")
-			else:
-				return render(request, 'login.html', {'message': "invalid login"})
+					return render(request, 'login.html', {'message': "invalid login"})
+			except:
+				user = User()
+				user.email = request.POST.get('email_id')
+				user.username = request.POST.get('email_id').split('@')[0]
+				user.set_password(password)
+				user.save()
+				user = authenticate(username=username, password=password)
+				login(request, user)
+				return HttpResponseRedirect("/home/")
+			
 		else:
 			return render(request, 'login.html', {})
 
