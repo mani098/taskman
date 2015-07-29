@@ -9,4 +9,5 @@ urlpatterns = patterns('',
 	url(r'^get-users/', views.get_user_suggestions, name='get_suggested_users'),
 	url(r'^created-tasks/', views.created_tasks_view, name='created-tasks'),
 	url(r'^assigned-tasks/', views.assigned_tasks_view, name='assigned-tasks'),
+	url(r'^option/delete/', views.delete_task_view, name='delete task'),
 	)

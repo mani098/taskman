@@ -3,9 +3,10 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
 from forms import CreateTaskForm
-from controllers import update_activity_feeds, get_activity_feeds, get_created_tasks, get_assigned_tasks
+from controllers import update_activity_feeds, get_activity_feeds, get_created_tasks, get_assigned_tasks, delete_task
 
 def login_view(request):
 
@@ -72,3 +73,14 @@ def assigned_tasks_view(request):
 	user_id = request.user.id
 	username = request.user.username
 	return render(request, 'assgined_tasks.html', {'username': username, 'tasks': get_assigned_tasks(username)})
+
+@csrf_exempt
+@login_required
+def delete_task_view(request):
+	if request.method == 'POST':
+		task_id = request.POST.get('task_id')
+		username = request.user.username
+		delete_task(task_id, username)
+		return HttpResponse('Task deleted')
+	else:
+		return HttpResponse("Use POST request")

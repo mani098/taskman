@@ -36,24 +36,32 @@
 </nav>  <!-- navigation bar ends-->
 	<div class="container">
 		<div class="panel panel-success">
-		<div class="panel-heading">Activity Feeds</div>
-		<div class="panel-body">
-			<table class="table table-hover">
-				<thead>
-					<tr><th>Task Name</th><th>Deadline</th><th>Assignee</th></tr>
-				</thead>
-				<tbody>
-				{% for task in tasks %}			
-					<tr>
-						<td>{{ task.task_name }}</td>
-						<td>{{ task.deadline_date|date:'d M, Y' }}</td>
-						<td>{{ task.assignee }}</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
+			<div class="panel-heading">Created Tasks</div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr><th>Task Name</th><th>Deadline</th><th>Assignee</th><th>Delete</th></tr>
+					</thead>
+					<tbody>
+					{% for task in tasks %}			
+						<tr>
+							<td>{{ task.task_name }}</td>
+							<td>{{ task.deadline_date|date:'d M, Y' }}</td>
+							<td>{{ task.assignee }}</td>
+							<td><span class='glyphicon glyphicon-remove delete-btn' 
+										aria-hidden="true" onclick="deleteOption({{ task.id }})"></span></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function deleteOption(delete_id) {
+			$("#task-row-" + delete_id).hide();
+			$.post("/option/delete/", {task_id: delete_id});
+		}
+	</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ $(document).ready(function(){
 			$("#user-suggest").autocomplete({
 			  source: '/get-users/'
 			});
-		
 	  });
+	
 });
+

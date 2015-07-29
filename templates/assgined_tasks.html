@@ -11,7 +11,6 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<link href="/static/css/site.css" rel='stylesheet' type='text/css' />
-	<script type="text/javascript" src="/static/js/site.js"></script>
 </head>
 <body>
  <nav class="navbar navbar-inverse">
@@ -36,24 +35,32 @@
 </nav>  <!-- navigation bar ends-->
 	<div class="container">
 		<div class="panel panel-success">
-		<div class="panel-heading">Activity Feeds</div>
-		<div class="panel-body">
-			<table class="table table-hover">
-				<thead>
-					<tr><th>Task Name</th><th>Deadline</th><th>Assigned by</th></tr>
-				</thead>
-				<tbody>
-				{% for task in tasks %}			
-					<tr>
-						<td>{{ task.task_name }}</td>
-						<td>{{ task.deadline_date|date:'d M, Y' }}</td>
-						<td>{{ task.user__username }}</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
+			<div class="panel-heading">Assigned Tasks</div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr><th>Task Name</th><th>Deadline</th><th>Assigned by</th><th>Delete</th></tr>
+					</thead>
+					<tbody>
+					{% for task in tasks %}			
+						<tr id="task-row-{{task.id}}">
+							<td>{{ task.task_name }}</td>
+							<td>{{ task.deadline_date|date:'d M, Y' }}</td>
+							<td>{{ task.user__username }}</td>
+							<td><span class='glyphicon glyphicon-remove delete-btn' 
+										aria-hidden="true" onclick="deleteOption({{ task.id }})"></span></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function deleteOption(delete_id) {
+			$("#task-row-" + delete_id).hide();
+			$.post("/option/delete/", {task_id: delete_id});
+		}
+	</script>
 </body>
 </html>

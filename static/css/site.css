@@ -46,6 +46,12 @@ p.form-group input.btn.btn-success{
 .btn-width {
 	width: 95%;
 }
+.delete-btn{
+	cursor: pointer;
+	margin-left: 12px;
+	color: #DA4747;
+}
+
 
 /*Bootstrap customization*/
 

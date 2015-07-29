@@ -16,10 +16,17 @@ def get_activity_feeds(user_id):
 def get_created_tasks(user_id):
 	"""Returns all the tasks created by the user"""
 
-	tasks = TaskVault.objects.filter(user_id=user_id).values('task_name', 'deadline_date', 'assignee')
+	tasks = TaskVault.objects.filter(user_id=user_id).values('id', 'task_name', 'deadline_date', 'assignee')
 	return list(tasks)
 
 def get_assigned_tasks(username):
 
-	tasks = TaskVault.objects.filter(assignee=username).values('task_name', 'deadline_date', 'user__username')
+	tasks = TaskVault.objects.filter(assignee=username).values('id', 'task_name', 'deadline_date', 'user__username')
 	return list(tasks)
+
+def delete_task(task_id, username):
+	task = TaskVault.objects.get(id=task_id)
+	user_id = task.user.id
+	task_name = task.task_name
+	update_activity_feeds(user_id, task_name, "you deleted task ")
+	task.delete()
