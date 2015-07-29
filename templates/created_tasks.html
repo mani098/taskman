@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>TaskMan | Home</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<link href="/static/css/site.css" rel='stylesheet' type='text/css' />
+	<script type="text/javascript" src="/static/js/site.js"></script>
+</head>
+<body>
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+	<div class="navbar-header">
+	  <a class="navbar-brand" href="">TaskMan</a>
+	</div>
+	<div>
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li class="active"><a href="{% url 'task_engine.views.created_tasks_view' %}">Created Tasks</a></li>
+        <li><a href="{% url 'task_engine.views.assigned_tasks_view' %}">Assigned Tasks</a></li>
+      </ul>
+    </div>
+	<div>
+	  <ul class="nav navbar-nav navbar-right">
+		<li><a href=""><span class="glyphicon glyphicon-user"></span> {{ username }}</a></li>
+		<li><a href="{% url 'task_engine.views.logout_view' %}"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+	  </ul>
+	</div>
+  </div>
+</nav>  <!-- navigation bar ends-->
+	<div class="container">
+		<div class="panel panel-success">
+		<div class="panel-heading">Activity Feeds</div>
+		<div class="panel-body">
+			{% for task in tasks %}
+				<p>{{ task }}</p>
+			{% endfor %}
+		</div>
+		</div>
+	</div>
+</body>
+</html>

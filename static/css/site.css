@@ -52,10 +52,18 @@ p.form-group input.btn.btn-success{
 .navbar {
 	border-radius: 0px;
 }
-.jumbotron {
-	padding-top: 0px;
+.jumbotron, .panel {
+	padding-top: 20px;
+	padding-bottom: 20px;
 	margin-right: 200px !important;
 	margin-left: 200px !important;
+}
+.panel{
+	padding-top: 0px;
+}
+.panel-body {
+	padding-left: 50px;
+	text-transform: capitalize;
 }
 .form-control {
 	box-shadow: none;
