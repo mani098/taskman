@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>TaskMan | Home</title>
+	<title>TaskMan | Created Tasks</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<!-- jQuery library -->
@@ -38,9 +38,20 @@
 		<div class="panel panel-success">
 		<div class="panel-heading">Activity Feeds</div>
 		<div class="panel-body">
-			{% for task in tasks %}
-				<p>{{ task }}</p>
-			{% endfor %}
+			<table class="table table-hover">
+				<thead>
+					<tr><th>Task Name</th><th>Deadline</th><th>Assignee</th></tr>
+				</thead>
+				<tbody>
+				{% for task in tasks %}			
+					<tr>
+						<td>{{ task.task_name }}</td>
+						<td>{{ task.deadline_date|date:'d M, Y' }}</td>
+						<td>{{ task.assignee }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
 		</div>
 		</div>
 	</div>

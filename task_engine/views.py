@@ -63,11 +63,12 @@ def get_user_suggestions(request):
 @login_required
 def created_tasks_view(request):
 	user_id = request.user.id
+	username = request.user.username
 	# return JsonResponse(get_created_tasks(user_id), safe=False)
-	return render(request, 'created_tasks.html', {'tasks': get_created_tasks(user_id)})
+	return render(request, 'created_tasks.html', {'username': username, 'tasks': get_created_tasks(user_id)})
 
 @login_required
 def assigned_tasks_view(request):
 	user_id = request.user.id
-
-	return render(request, 'assgined_tasks.html', {'tasks': get_assigned_tasks})
+	username = request.user.username
+	return render(request, 'assgined_tasks.html', {'username': username, 'tasks': get_assigned_tasks(username)})

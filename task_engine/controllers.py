@@ -19,7 +19,7 @@ def get_created_tasks(user_id):
 	tasks = TaskVault.objects.filter(user_id=user_id).values('task_name', 'deadline_date', 'assignee')
 	return list(tasks)
 
-def get_assigned_tasks(user_id):
+def get_assigned_tasks(username):
 
-	tasks = TaskVault.objects.filter(user_id=user_id).values('task_name', 'deadline_date', 'username')
+	tasks = TaskVault.objects.filter(assignee=username).values('task_name', 'deadline_date', 'user__username')
 	return list(tasks)
