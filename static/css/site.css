@@ -1,0 +1,66 @@
+body{
+	font-family: "Open Sans",Helvetica,Arial,sans-serif;
+	background-color: #F8F8F8;
+}
+
+header h2{
+	text-align: center;
+	margin-top: 10%;
+	font-size: 2.5em !important;
+	font-weight: 300
+}
+.login-form{
+	text-align: center;
+	margin-top: 2%;
+}
+
+div.col-sm-12{
+	padding-bottom: 2%;
+	padding-top: 1%;
+	text-align: center;
+}
+div.row{
+	margin-bottom: 2%;
+	margin-left: inherit;
+}
+td.center input{
+	margin-top: 2%;
+}
+a.btn.btn-info{
+	text-align: center;
+}
+.note{
+	color: red;
+}
+.form-control{
+	width: 280px;
+	margin: 0 auto;
+}
+p.form-group input.btn.btn-success{
+	margin-top: 10px;
+}
+.center{
+	text-align: center;
+}
+
+.btn-width {
+	width: 95%;
+}
+
+/*Bootstrap customization*/
+
+.navbar {
+	border-radius: 0px;
+}
+.jumbotron {
+	padding-top: 0px;
+	margin-right: 200px !important;
+	margin-left: 200px !important;
+}
+.form-control {
+	box-shadow: none;
+}
+.form-control:focus {
+	box-shadow: none;
+	border-color: #7DC67D;
+}

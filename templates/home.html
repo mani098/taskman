@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>TaskMan | Home</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	<!-- jQuery library -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<link href="/static/css/site.css" rel='stylesheet' type='text/css' />
+	<script type="text/javascript" src="/static/js/site.js"></script>
+	<script>
+		$(function() {
+			$("#datepicker").datepicker();
+		});
+	</script>
+</head>
+<body>
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+	<div class="navbar-header">
+	  <a class="navbar-brand" href="">TaskMan</a>
+	</div>
+	<div>
+	  <ul class="nav navbar-nav navbar-right">
+		<li><a href=""><span class="glyphicon glyphicon-user"></span> {{ username }}</a></li>
+		<li><a href="{% url 'task_engine.views.logout_view' %}"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+	  </ul>
+	</div>
+  </div>
+ </nav>  <!-- navigation bar ends-->
+<div class="container">
+	<div class="jumbotron">
+	<h3 style="margin-top:10px;" class="center">Create Task</h3>
+		<div class="login-form">
+			<form role="form" class="form-horizontal" method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<label class="control-label col-sm-4">Task Name</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" autocomplete="off" 
+							placeholder="Enter Taskname"
+							name="task_name" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Deadline Date</label>
+					<div class="col-sm-6">
+						<input id="datepicker" type="text" class="form-control" autocomplete="off" 
+							placeholder="Enter Date" name="deadline_date" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Assignee</label>
+					<div class="col-sm-6">
+						<input name="assignee" class="form-control" id='user-suggest' required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-6">
+						<input type="submit" class="btn btn-success btn-width" value="Create Task" name="create-task-btn">
+					</div>
+				</div>
+			</form>
+			{%if error %}
+				<p id="task-response" style="color:red">{{error}}</p>
+			{% elif message %}
+				<p id="task-response" style="color:green">{{message}}</p>
+			{% endif%}
+		</div>
+	</div>
+</div>
+</body>
+</html>
